@@ -9,20 +9,21 @@ import SwiftUI
 
 struct RouterView: View {
     @ObservedObject var router = Router<Path>()
-    
+    let scenes: AppScenes
+            
     var body: some View {
         NavigationStack(path: $router.paths) {
-            PokemonListView()
+            scenes.pokemonListScene
                 .navigationDestination(for: Path.self) { path in
                     switch path {
-                    case .pokemonList: PokemonListView()
-                    case .pokemonDetail: PokemonDetailView()
+                    case .pokemonList: scenes.pokemonListScene
+                    case .pokemonDetail: scenes.pokemonDetailScene
                     }
                 }
         }.environmentObject(router)
     }
 }
 
-#Preview {
-    RouterView()
-}
+//#Preview {
+//    RouterView()
+//}

@@ -10,10 +10,17 @@ import SwiftData
 
 @main
 struct Pokedex_VIPApp: App {
+    private let assembler: PokedexAppAssembler
+    private let scenes: AppScenes
 
+    init() {
+        self.assembler = PokedexAppAssembler()
+        self.scenes = AppScenes(assembler: assembler)
+    }
+    
     var body: some Scene {
         WindowGroup {
-            RouterView()
+            RouterView(scenes: scenes)
         }
     }
 }

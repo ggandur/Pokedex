@@ -9,21 +9,37 @@ import SwiftUI
 
 struct PokemonListView: View {
     @EnvironmentObject var router: Router<Path>
+    @ObservedObject var data: PokemonListData
+    let interactor: PokemonListInteractorProtocol
     
     var body: some View {
         VStack {
-            Text("PokemonListView")
-            Button(
-                action: {
+            Text("Pokémon List")
+                .font(.headline)
+            List(data.pokemons, id: \.name) { pokemon in
+                Button {
+                    print("\(pokemon.name) selected")
                     router.push(.pokemonDetail)
-                },
-                label: {
-                    Text("Go to Pokemon Detail")
-                })
+                } label: {
+                    Text(pokemon.name.capitalized)
+                }
+            }
+        }
+        .overlay {
+            if data.isLoading {
+                ProgressView()
+            }
+        }
+        .onAppear {
+            Task {
+                if data.pokemons.isEmpty {
+                    await interactor.fetchPokemons()
+                }
+            }
         }
     }
 }
 
-#Preview {
-    PokemonListView()
-}
+//#Preview {
+//    PokemonListView()
+//}
