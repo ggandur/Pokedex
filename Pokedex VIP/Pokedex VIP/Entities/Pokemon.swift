@@ -9,19 +9,20 @@ import Foundation
 
 struct PokemonListResponse: Decodable {
     let next: String?
-    let results: [Pokemon]
+    let results: [PokemonEntry]
 }
 
-struct Pokemon: Decodable {
+struct PokemonEntry: Decodable, Equatable {
     let name: String
     let url: String
 }
 
-struct PokemonDetails {
+struct Pokemon: Decodable {
     let id: Int
+    let name: String
     let sprites: Sprites
 }
 
-struct Sprites {
+struct Sprites: Decodable {
     let front_default: String
 }

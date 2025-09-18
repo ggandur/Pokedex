@@ -13,23 +13,17 @@ struct PokemonListView: View {
     let interactor: PokemonListInteractorProtocol
     
     var body: some View {
-        VStack {
-            Text("Pokémon List")
-                .font(.headline)
-            List(data.pokemons, id: \.name) { pokemon in
-                Button {
-                    print("\(pokemon.name) selected")
-                    router.push(.pokemonDetail)
-                } label: {
-                    HStack {
-                        Image(systemName: "dog.fill")
-                        Text(pokemon.name.capitalized)
-                    }
-                    .onAppear {
-                        Task {
-                            
-                        }
-                    }
+        List(data.pokemons, id: \.name) { pokemon in
+            Button {
+                print("\(pokemon.name) selected")
+                router.push(.pokemonDetail)
+            } label: {
+                HStack {
+                    AsyncImage(url: URL(string: pokemon.sprites.front_default))
+                        .frame(width: 44, height: 44)
+                        .scaledToFit()
+                        .padding(.horizontal)
+                    Text(pokemon.name.capitalized)
                 }
             }
         }

@@ -14,10 +14,11 @@ struct RouterView: View {
     var body: some View {
         NavigationStack(path: $router.paths) {
             scenes.pokemonListScene
+                .navigationTitle("Pokémon List")
                 .navigationDestination(for: Path.self) { path in
                     switch path {
-                    case .pokemonList: scenes.pokemonListScene
-                    case .pokemonDetail: scenes.pokemonDetailScene
+                    case .pokemonList: scenes.pokemonListScene.navigationTitle("Pokémon List")
+                    case .pokemonDetail: scenes.pokemonDetailScene.navigationTitle("Pokemon Detail")
                     }
                 }
         }.environmentObject(router)

@@ -8,8 +8,7 @@
 import Foundation
 
 struct ApiServiceConstants {
-    let pokemonFetchLimit: Int = 100
-    let spritesUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+    let pokemonFetchLimit: Int = 20
     let pokeApiUrl: String
     
     init() {
