@@ -12,7 +12,6 @@ struct AppScenes {
     let pokemonDetailScene: PokemonDetailView
 
     init(assembler: PokedexAppAssembler) {
-        // Use assembler to configure the scenes
         self.pokemonListScene = assembler.makePokemonListScene()
         self.pokemonDetailScene = PokemonDetailView()
     }

@@ -21,7 +21,15 @@ struct PokemonListView: View {
                     print("\(pokemon.name) selected")
                     router.push(.pokemonDetail)
                 } label: {
-                    Text(pokemon.name.capitalized)
+                    HStack {
+                        Image(systemName: "dog.fill")
+                        Text(pokemon.name.capitalized)
+                    }
+                    .onAppear {
+                        Task {
+                            
+                        }
+                    }
                 }
             }
         }

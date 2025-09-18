@@ -9,6 +9,7 @@ import Foundation
 
 protocol PokemonListInteractorProtocol {
     func fetchPokemons() async
+    func fetchSprite(id: Int) async
 }
 
 final class PokemonListInteractor: PokemonListInteractorProtocol {
@@ -34,5 +35,14 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
         }
         
         presenter.updateLoading(false)
+    }
+    
+    @MainActor
+    func fetchSprite(id: Int) async {
+        do {
+            let sprite = try await apiService.fetchPokemonImage(id: id)
+        } catch {
+            print("Error fetching sprite for id: \(id)")
+        }
     }
 }

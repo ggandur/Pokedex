@@ -10,7 +10,7 @@ import Foundation
 protocol PokemonApiServiceProtocol {
     func fetchPokemons() async throws -> PokemonListResponse
 //    func fetchPokemonDetails(id: Int) async throws -> PokemonDetails
-//    func fetchPokemonImage(url: String) async throws -> Data
+    func fetchPokemonImage(id: Int) async throws -> Data
 }
 
 final class PokemonApiService: PokemonApiServiceProtocol {
@@ -19,9 +19,11 @@ final class PokemonApiService: PokemonApiServiceProtocol {
 //        <#code#>
 //    }
 //    
-//    func fetchPokemonImage(url: String) async throws -> Data {
-//        <#code#>
-//    }
+    func fetchPokemonImage(id: Int) async throws -> Data {
+        let url = URL(string: "\(constants.spritesUrl)\(id).png")!
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return data
+    }
     
     func fetchPokemons() async throws -> PokemonListResponse {
         let url = URL(string: constants.pokeApiUrl)!
