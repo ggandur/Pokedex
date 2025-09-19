@@ -10,23 +10,24 @@ import SwiftUI
 struct PokemonListView: View {
     @EnvironmentObject var router: Router<Path>
     @ObservedObject var data: PokemonListData
+    @State var searchText: String = ""
     let interactor: PokemonListInteractorProtocol
     
     var body: some View {
-        List(data.pokemons, id: \.name) { pokemon in
+        List(data.filteredPokemons) { pokemon in
             Button {
                 print("\(pokemon.name) selected")
                 router.push(.pokemonDetail)
             } label: {
-                HStack {
-                    AsyncImage(url: URL(string: pokemon.sprites.front_default))
-                        .frame(width: 44, height: 44)
-                        .scaledToFit()
-                        .padding(.horizontal)
-                    Text(pokemon.name.capitalized)
-                }
+                PokemonListCell(pokemon: pokemon)
             }
+            .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.clear)
+            .buttonStyle(.glass)
         }
+        .searchable(text: $data.searchText, prompt: "Search Pokémon")
+        .listStyle(.plain)
         .overlay {
             if data.isLoading {
                 ProgressView()
@@ -42,6 +43,7 @@ struct PokemonListView: View {
     }
 }
 
-//#Preview {
-//    PokemonListView()
-//}
+#Preview {
+    let assembler = PokedexAppAssembler()
+    assembler.makePokemonListScene()
+}

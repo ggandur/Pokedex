@@ -17,7 +17,7 @@ struct PokemonEntry: Decodable, Equatable {
     let url: String
 }
 
-struct Pokemon: Decodable {
+struct Pokemon: Decodable, Identifiable {
     let id: Int
     let name: String
     let sprites: Sprites
