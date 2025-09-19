@@ -8,8 +8,14 @@
 import Foundation
 
 struct PokemonListResponse: Decodable {
+    let count: Int
     let next: String?
+    let previous: String?
     let results: [PokemonEntry]
+    
+    var hasNextPage: Bool {
+        return next != nil
+    }
 }
 
 struct PokemonEntry: Decodable, Equatable {
@@ -17,12 +23,12 @@ struct PokemonEntry: Decodable, Equatable {
     let url: String
 }
 
-struct Pokemon: Decodable, Identifiable {
+struct Pokemon: Decodable, Identifiable, Equatable {
     let id: Int
     let name: String
     let sprites: Sprites
 }
 
-struct Sprites: Decodable {
+struct Sprites: Decodable, Equatable {
     let front_default: String
 }

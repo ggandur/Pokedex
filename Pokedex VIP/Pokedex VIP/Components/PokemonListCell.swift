@@ -16,6 +16,7 @@ struct PokemonListCell: View {
     
     var body: some View {
         HStack {
+            Text(String(pokemon.id))
             AsyncImage(url: URL(string: pokemon.sprites.front_default)) { image in
                 image
                     .resizable()
@@ -23,6 +24,7 @@ struct PokemonListCell: View {
                     .clipShape(Circle())
             } placeholder: {
                 ProgressView()
+                    .frame(width: 64)
             }
             .frame(height: 64)
             Text(pokemon.name.capitalized)

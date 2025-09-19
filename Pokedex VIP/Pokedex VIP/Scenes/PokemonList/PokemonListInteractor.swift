@@ -15,6 +15,8 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
     private let presenter: PokemonListPresenterProtocol
     private let apiService: PokemonApiServiceProtocol
     
+    private var nextUrl: String? = ApiServiceConstants().pokeApiUrl
+    
     init(presenter: PokemonListPresenterProtocol, apiService: PokemonApiServiceProtocol) {
         self.presenter = presenter
         self.apiService = apiService
@@ -22,18 +24,21 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
     
     @MainActor
     func fetchPokemons() async {
+        print(nextUrl ?? "nil")
+//        guard let url = nextUrl else { return }
+        
         presenter.updateLoading(true)
-
+                
         do {
-            let response = try await apiService.fetchPokemonsList()
+            let response = try await apiService.fetchPokemonsList(from: nextUrl!)
             let pokemons = try await apiService.fetchPokemons(pokemonEntries: response.results)
             presenter.didFetchPokemons(pokemons: pokemons)
+            nextUrl = response.next
         } catch let decodingError as DecodingError {
             presenter.updateError(.decodingError(decodingError))
         } catch {
             presenter.updateError(.networkError(error))
         }
-        
         presenter.updateLoading(false)
     }
 }
