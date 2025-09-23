@@ -30,5 +30,5 @@ struct Pokemon: Decodable, Identifiable, Equatable {
 }
 
 struct Sprites: Decodable, Equatable {
-    let front_default: String
+    let front_default: String?
 }

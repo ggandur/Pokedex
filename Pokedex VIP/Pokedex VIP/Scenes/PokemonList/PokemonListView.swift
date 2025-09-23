@@ -25,7 +25,7 @@ struct PokemonListView: View {
                 .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
-                .buttonStyle(.glass)
+                .glassButtonIfAvailable()
                 .onAppear {
                     Task {
                         if pokemon == data.pokemons.last && !data.isLoading {
@@ -55,4 +55,15 @@ struct PokemonListView: View {
 #Preview {
     let assembler = PokedexAppAssembler()
     assembler.makePokemonListScene()
+}
+
+extension View {
+    @ViewBuilder
+    func glassButtonIfAvailable() -> some View {
+        if #available(iOS 26.0, *) {
+            self.buttonStyle(.glass)
+        } else {
+            self
+        }
+    }
 }

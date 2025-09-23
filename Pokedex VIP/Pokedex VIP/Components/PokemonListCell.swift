@@ -16,17 +16,25 @@ struct PokemonListCell: View {
     
     var body: some View {
         HStack {
-            Text(String(pokemon.id))
-            AsyncImage(url: URL(string: pokemon.sprites.front_default)) { image in
-                image
+            if let pokemonSpriteUrl = pokemon.sprites.front_default {
+                AsyncImage(url: URL(string: pokemonSpriteUrl)) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(Circle())
+                } placeholder: {
+                    ProgressView()
+                        .frame(width: 64)
+                }
+                .frame(height: 64)
+                
+            } else {
+                Image("pokeball_8bit")
                     .resizable()
                     .scaledToFit()
                     .clipShape(Circle())
-            } placeholder: {
-                ProgressView()
-                    .frame(width: 64)
+                    .frame(height: 64)
             }
-            .frame(height: 64)
             Text(pokemon.name.capitalized)
                 .padding()
             Spacer()

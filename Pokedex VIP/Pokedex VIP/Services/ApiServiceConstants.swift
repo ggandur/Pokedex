@@ -8,7 +8,7 @@
 import Foundation
 
 struct ApiServiceConstants {
-    let pokemonFetchLimit: Int = 20
+    let pokemonFetchLimit: Int = 25
     let pokeApiUrl: String
     
     init() {

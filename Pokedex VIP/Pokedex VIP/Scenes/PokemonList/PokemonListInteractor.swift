@@ -24,14 +24,16 @@ final class PokemonListInteractor: PokemonListInteractorProtocol {
     
     @MainActor
     func fetchPokemons() async {
-        print(nextUrl ?? "nil")
-//        guard let url = nextUrl else { return }
+        
+        guard let url = nextUrl else {
+            return
+        }
         
         presenter.updateLoading(true)
-                
+                    
         do {
-            let response = try await apiService.fetchPokemonsList(from: nextUrl!)
-            let pokemons = try await apiService.fetchPokemons(pokemonEntries: response.results)
+            let response = try await apiService.fetchPokemonsList(from: url)
+            let pokemons = await apiService.fetchPokemons(pokemonEntries: response.results)
             presenter.didFetchPokemons(pokemons: pokemons)
             nextUrl = response.next
         } catch let decodingError as DecodingError {
