@@ -22,9 +22,6 @@ struct PokemonListView: View {
                 } label: {
                     PokemonListCell(pokemon: pokemon)
                 }
-                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                .listRowSeparator(.hidden)
-                .listRowBackground(Color.clear)
                 .glassButtonIfAvailable()
                 .onAppear {
                     Task {
@@ -33,7 +30,7 @@ struct PokemonListView: View {
                         }
                     }
                 }
-            }            
+            }
         }
         .searchable(text: $data.searchText, prompt: "Search Pokémon")
         .listStyle(.plain)
@@ -61,9 +58,13 @@ extension View {
     @ViewBuilder
     func glassButtonIfAvailable() -> some View {
         if #available(iOS 26.0, *) {
-            self.buttonStyle(.glass)
-        } else {
             self
+                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+                .buttonStyle(.glass)
+        } else {
+            self.buttonStyle(.plain)
         }
     }
 }
