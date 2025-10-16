@@ -9,8 +9,7 @@ import SwiftUI
 
 struct PokemonListView: View {
     @EnvironmentObject var router: Router<Path>
-    @ObservedObject var data: PokemonListData
-    @State var searchText: String = ""
+    @State var data: PokemonListData
     let interactor: PokemonListInteractorProtocol
     
     var body: some View {
@@ -18,7 +17,7 @@ struct PokemonListView: View {
             ForEach(data.filteredPokemons) { pokemon in
                 Button {
                     print("\(pokemon.name) selected")
-                    router.push(.pokemonDetail)
+                    router.push(.pokemonDetail(pokemon))
                 } label: {
                     PokemonListCell(pokemon: pokemon)
                 }
@@ -50,7 +49,7 @@ struct PokemonListView: View {
 }
 
 #Preview {
-    let assembler = PokedexAppAssembler()
+    let assembler = PokedexScenesBuilder()
     assembler.makePokemonListScene()
 }
 

@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-enum Path {
+enum Path: Hashable {
     case pokemonList
-    case pokemonDetail
+    case pokemonDetail(Pokemon)
 }
 
 final class Router<T: Hashable>: ObservableObject {

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Observation
 
 protocol PokemonListDataProtocol {
     var pokemons: [Pokemon] { get set }
@@ -15,10 +16,11 @@ protocol PokemonListDataProtocol {
     var searchText: String { get set }
 }
 
-final class PokemonListData: PokemonListDataProtocol, ObservableObject {
-    @Published var pokemons: [Pokemon] = []
-    @Published var isLoading: Bool = false
-    @Published var searchText: String = ""
+@Observable
+final class PokemonListData: PokemonListDataProtocol {
+    var pokemons: [Pokemon] = []
+    var isLoading: Bool = false
+    var searchText: String = ""
     var error: PokemonListError?
     var filteredPokemons: [Pokemon] {
         if searchText.isEmpty { return pokemons }

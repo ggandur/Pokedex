@@ -23,12 +23,12 @@ struct PokemonEntry: Decodable, Equatable {
     let url: String
 }
 
-struct Pokemon: Decodable, Identifiable, Equatable {
+struct Pokemon: Decodable, Identifiable, Equatable, Hashable {
     let id: Int
     let name: String
     let sprites: Sprites
 }
 
-struct Sprites: Decodable, Equatable {
+struct Sprites: Decodable, Equatable, Hashable {
     let front_default: String?
 }

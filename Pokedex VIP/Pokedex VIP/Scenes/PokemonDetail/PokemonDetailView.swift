@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
+    @EnvironmentObject var router: Router<Path>
+    @ObservedObject var data: PokemonDetailData
+    
     var body: some View {
-        Text("Pokemon Detail View")
+        if let pokemon = data.pokemon {
+            Text(pokemon.name)
+        } else {
+            Text("Sem dados de Pokémon")
+        }
     }
 }
 
-#Preview {
-    PokemonDetailView()
-}
+//#Preview {
+//    PokemonDetailView()
+//}

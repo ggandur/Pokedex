@@ -8,8 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct PokedexAppAssembler {
+struct PokedexScenesBuilder {
     func makePokemonListScene() -> PokemonListView {
         PokemonListConfigurator().configure()
+    }
+    
+    func makePokemonDetailScene(pokemon: Pokemon) -> PokemonDetailView {
+        PokemonDetailConfigurator().configure(pokemon: pokemon)
     }
 }
