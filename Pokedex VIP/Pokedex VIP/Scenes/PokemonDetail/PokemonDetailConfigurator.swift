@@ -6,10 +6,14 @@
 //
 
 final class PokemonDetailConfigurator {
-    private let data = PokemonDetailData()
+    private var data = PokemonDetailData()
+    
+    private lazy var presenter: PokemonDetailPresenter = .init(data: data)
+    
+    private lazy var interactor: PokemonDetailInteractor = .init(presenter: presenter)
     
     func configure(pokemon: Pokemon) -> PokemonDetailView {
         data.pokemon = pokemon
-        return PokemonDetailView(data: data)
+        return PokemonDetailView(data: data, interactor: interactor)
     }
 }

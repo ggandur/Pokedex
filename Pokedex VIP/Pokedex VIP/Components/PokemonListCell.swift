@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PokemonListCell: View {
+    @Environment(UserData.self) var userData
     let pokemon: Pokemon
     
     init(pokemon: Pokemon) {
@@ -38,11 +39,17 @@ struct PokemonListCell: View {
             Text(pokemon.name.capitalized)
                 .padding()
             Spacer()
+            
+            if userData.user.favoritePokemons.contains(pokemon) {
+                Image(systemName: "heart.fill").foregroundColor(.red)
+                    .padding()
+            }
+
         }
         .frame(maxWidth: .infinity)
     }
 }
 
 #Preview {
-    PokemonListCell(pokemon: Pokemon(id: 25, name: "pikachu", sprites: Sprites(front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png")))
+    PokemonListCell(pokemon: Pokemon.mock)
 }

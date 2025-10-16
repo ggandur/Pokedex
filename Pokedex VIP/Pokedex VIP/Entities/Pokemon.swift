@@ -23,12 +23,25 @@ struct PokemonEntry: Decodable, Equatable {
     let url: String
 }
 
-struct Pokemon: Decodable, Identifiable, Equatable, Hashable {
+struct Pokemon: Codable, Identifiable, Equatable, Hashable {
     let id: Int
     let name: String
     let sprites: Sprites
 }
 
-struct Sprites: Decodable, Equatable, Hashable {
+struct Sprites: Codable, Equatable, Hashable {
     let front_default: String?
+    let other: Other
+}
+
+struct Other: Codable, Equatable, Hashable {
+    let officialArtwork: OfficialArtwork
+
+    private enum CodingKeys: String, CodingKey {
+        case officialArtwork = "official-artwork"
+    }
+}
+
+struct OfficialArtwork: Codable, Equatable, Hashable {
+    let front_default: String
 }

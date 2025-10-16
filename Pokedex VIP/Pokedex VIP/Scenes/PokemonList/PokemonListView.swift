@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct PokemonListView: View {
-    @EnvironmentObject var router: Router<Path>
-    @State var data: PokemonListData
+    @Environment(Router<Path>.self) var router
+    @Bindable var data: PokemonListData
     let interactor: PokemonListInteractorProtocol
     
     var body: some View {
         List {
             ForEach(data.filteredPokemons) { pokemon in
                 Button {
-                    print("\(pokemon.name) selected")
                     router.push(.pokemonDetail(pokemon))
                 } label: {
                     PokemonListCell(pokemon: pokemon)
@@ -49,8 +48,8 @@ struct PokemonListView: View {
 }
 
 #Preview {
-    let assembler = PokedexScenesBuilder()
-    assembler.makePokemonListScene()
+    let sceneBuilder = PokedexScenesBuilder()
+    sceneBuilder.makePokemonListScene()
 }
 
 extension View {

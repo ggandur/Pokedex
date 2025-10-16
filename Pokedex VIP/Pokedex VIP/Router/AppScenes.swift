@@ -9,10 +9,8 @@ import Foundation
 
 struct AppScenes {
     let pokemonListScene: PokemonListView
-//    let pokemonDetailScene: PokemonDetailView
 
-    init(assembler: PokedexScenesBuilder) {
-        self.pokemonListScene = assembler.makePokemonListScene()
-//        self.pokemonDetailScene = assembler.makePokemonDetailScene()
+    init(sceneBuilder: PokedexScenesBuilder) {
+        self.pokemonListScene = sceneBuilder.makePokemonListScene()
     }
 }

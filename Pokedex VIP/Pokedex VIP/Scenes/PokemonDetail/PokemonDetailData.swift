@@ -10,8 +10,15 @@ import SwiftUI
 
 protocol PokemonDetailDataProtocol {
     var pokemon: Pokemon? { get set }
+    var userData: UserData? { get set }
 }
 
-final class PokemonDetailData: PokemonDetailDataProtocol, ObservableObject {
-    @Published var pokemon: Pokemon?
+@Observable
+final class PokemonDetailData: PokemonDetailDataProtocol {
+    var pokemon: Pokemon?
+    var userData: UserData?
+    
+    init(pokemon: Pokemon? = nil) {
+        self.pokemon = pokemon
+    }
 }

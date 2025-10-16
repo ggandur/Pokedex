@@ -15,12 +15,12 @@ struct Pokedex_VIPApp: App {
 
     init() {
         self.scenesBuilder = PokedexScenesBuilder()
-        self.scenes = AppScenes(assembler: scenesBuilder)
+        self.scenes = AppScenes(sceneBuilder: scenesBuilder)
     }
     
     var body: some Scene {
         WindowGroup {
-            RouterView(scenesBuilder: scenesBuilder)
+            RouterView(scenesBuilder: scenesBuilder, scenes: scenes)
         }
     }
 }

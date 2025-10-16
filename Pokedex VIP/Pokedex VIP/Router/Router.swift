@@ -13,8 +13,9 @@ enum Path: Hashable {
     case pokemonDetail(Pokemon)
 }
 
+@Observable
 final class Router<T: Hashable>: ObservableObject {
-    @Published var paths: [T] = []
+    var paths: [T] = []
     
     func push(_ path: T) {
         paths.append(path)

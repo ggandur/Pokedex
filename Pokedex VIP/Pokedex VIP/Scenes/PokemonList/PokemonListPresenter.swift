@@ -8,7 +8,6 @@
 import Foundation
 
 protocol PokemonListPresenterProtocol {
-//    func didSelect(pokemon: Pokemon)
     func didFetchPokemons(pokemons: [Pokemon])
     func updateLoading(_ isLoading: Bool)
     func updateError(_ error: PokemonListError?)
