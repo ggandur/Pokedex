@@ -24,7 +24,8 @@ struct RouterView: View {
                             .navigationTitle("Pokédex")
 
                     case .pokemonDetail(let pokemon):
-                        scenesBuilder.makePokemonDetailScene(pokemon: pokemon)
+                        scenesBuilder.makePokemonDetailScene(pokemon: pokemon,
+                                                             userData: userData)
                             .navigationTitle(pokemon.name.capitalized)
                     }
                 }

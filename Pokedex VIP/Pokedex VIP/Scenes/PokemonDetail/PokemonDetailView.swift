@@ -25,9 +25,6 @@ struct PokemonDetailView: View {
                 }
                 .frame(height: 320)
             }
-            .onAppear {
-                data.userData = userData
-            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -48,7 +45,8 @@ struct PokemonDetailView: View {
 
 #Preview {
     let sceneBuilder = PokedexScenesBuilder()
-    sceneBuilder.makePokemonDetailScene(pokemon: Pokemon.mock)
+    sceneBuilder.makePokemonDetailScene(pokemon: Pokemon.mock,
+                                        userData: UserData.mock)
 }
 
 extension PokemonDetailView {

@@ -10,15 +10,16 @@ import SwiftUI
 
 protocol PokemonDetailDataProtocol {
     var pokemon: Pokemon? { get set }
-    var userData: UserData? { get set }
+    var userData: UserData { get set }
 }
 
 @Observable
 final class PokemonDetailData: PokemonDetailDataProtocol {
     var pokemon: Pokemon?
-    var userData: UserData?
+    var userData: UserData
     
-    init(pokemon: Pokemon? = nil) {
+    init(pokemon: Pokemon? = nil, userData: UserData) {
         self.pokemon = pokemon
+        self.userData = userData
     }
 }

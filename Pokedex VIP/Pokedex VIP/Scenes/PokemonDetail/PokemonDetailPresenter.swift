@@ -19,11 +19,10 @@ final class PokemonDetailPresenter: PokemonDetailPresenterProtocol {
     }
     
     func updateFavorites(pokemon: Pokemon) {
-        guard let userData = data.userData else { return }
-        if userData.user.favoritePokemons.contains(pokemon) {
-            userData.user.favoritePokemons.remove(pokemon)
+        if data.userData.user.favoritePokemons.contains(pokemon) {
+            data.userData.user.favoritePokemons.remove(pokemon)
         } else {
-            userData.user.favoritePokemons.insert(pokemon)
+            data.userData.user.favoritePokemons.insert(pokemon)
         }
     }
 }

@@ -10,10 +10,13 @@ import SwiftUI
 
 struct PokedexScenesBuilder {
     func makePokemonListScene() -> PokemonListView {
-        PokemonListConfigurator().configure()
+        let pokemonListConfigurator = PokemonListConfigurator()
+        return pokemonListConfigurator.configure()
     }
     
-    func makePokemonDetailScene(pokemon: Pokemon) -> PokemonDetailView {
-        PokemonDetailConfigurator().configure(pokemon: pokemon)
+    func makePokemonDetailScene(pokemon: Pokemon, userData: UserData) -> PokemonDetailView {
+        let pokemonDetailConfigurator = PokemonDetailConfigurator(pokemon: pokemon,
+                                                                  userData: userData)
+        return pokemonDetailConfigurator.configure()
     }
 }
