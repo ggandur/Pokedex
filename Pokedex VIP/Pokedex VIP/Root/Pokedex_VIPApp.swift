@@ -10,6 +10,9 @@ import SwiftData
 
 @main
 struct Pokedex_VIPApp: App {
+    @State var router = Router<Path>()
+    @State var userData = UserData(user: User(name: "Gandur"))
+
     private let scenesBuilder: PokedexScenesBuilder
     private let scenes: AppScenes
 
@@ -22,5 +25,7 @@ struct Pokedex_VIPApp: App {
         WindowGroup {
             RouterView(scenesBuilder: scenesBuilder, scenes: scenes)
         }
+        .environment(router)
+        .environment(userData)
     }
 }

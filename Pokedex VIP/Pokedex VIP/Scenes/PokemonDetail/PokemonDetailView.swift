@@ -45,8 +45,7 @@ struct PokemonDetailView: View {
 
 #Preview {
     let sceneBuilder = PokedexScenesBuilder()
-    sceneBuilder.makePokemonDetailScene(pokemon: Pokemon.mock,
-                                        userData: UserData.mock)
+    sceneBuilder.makePokemonDetailScene(pokemon: Pokemon.mock, userData: UserData.mock)
 }
 
 extension PokemonDetailView {

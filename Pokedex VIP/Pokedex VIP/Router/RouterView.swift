@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct RouterView: View {
-    @State var router = Router<Path>()
-    @State var userData = UserData(user: User(name: "Gandur"))
+    @Environment(Router<Path>.self) var router
+    @Environment(UserData.self) var userData
+    
     let scenesBuilder: PokedexScenesBuilder
     let scenes: AppScenes
     
     var body: some View {
+        @Bindable var router = router
+        
         NavigationStack(path: $router.paths) {
             scenes.pokemonListScene
                 .navigationTitle("Pokédex")
@@ -22,15 +25,12 @@ struct RouterView: View {
                     case .pokemonList:
                         scenes.pokemonListScene
                             .navigationTitle("Pokédex")
-
+                        
                     case .pokemonDetail(let pokemon):
-                        scenesBuilder.makePokemonDetailScene(pokemon: pokemon,
-                                                             userData: userData)
-                            .navigationTitle(pokemon.name.capitalized)
+                        scenesBuilder.makePokemonDetailScene(pokemon: pokemon, userData: userData)
+                        .navigationTitle(pokemon.name.capitalized)
                     }
                 }
         }
-        .environment(router)
-        .environment(userData)
     }
 }

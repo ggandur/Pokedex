@@ -14,10 +14,10 @@ enum Path: Hashable {
 }
 
 @Observable
-final class Router<T: Hashable>: ObservableObject {
-    var paths: [T] = []
+final class Router<Path: Hashable> {
+    var paths: [Path] = []
     
-    func push(_ path: T) {
+    func push(_ path: Path) {
         paths.append(path)
     }
     
